@@ -1,7 +1,7 @@
 # Clicky-Game
 A simple memory game where the player must click each guitar once and only once.
 
-The deployed application can be found [here]("https://jes3rk.github.io/clicky-game/")
+The deployed application can be found [here](https://jes3rk.github.io/clicky-game/)
 
 ## Initialize Local Development
 This app is built on React and therefore requires a number of additional packages and add-ons.
