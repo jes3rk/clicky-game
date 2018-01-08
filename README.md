@@ -1,6 +1,8 @@
 # Clicky-Game
 A simple memory game where the player must click each guitar once and only once.
 
+The deployed application can be found [here]("https://jes3rk.github.io/clicky-game/")
+
 ## Initialize Local Development
 This app is built on React and therefore requires a number of additional packages and add-ons.
 
@@ -26,4 +28,8 @@ A helper function that seems solves an important issue. React relies on the prin
 This is a simple function that maps the existing ```state.options``` array onto the ```<ImagePanel />``` component and passes the necessary properties or "props" to the component for rendering.
 
 ### Image.js
-```Image.js``` is the component that generates the image tiles that the player interacts with. 
+```Image.js``` is the component that generates the image tiles that the player interacts with. It takes a number of properties or "props" that determine how each tile is displayed. The most important and interesting of these props is the ```onClick``` attribute.
+
+When the user clicks on an image, the event triggers a callback function passed to the image via props. The ```click``` function that is found in ```App.js``` takes an id as an argument, and here we can see how that ```dataid``` attribute that is unique to each guitar is taken from the ```event.target``` and passed to the ```click``` function.
+
+This component is entirely resuable and can be passed any callback function or id and can be used for any number of applications.
