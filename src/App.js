@@ -85,18 +85,29 @@ class App extends Component {
           idClicked: arr,
         });
       } else {
-        let newArr = [];
-        while (newArr.length < 12) {
-          let rand = Math.floor(Math.random() * this.state.options.length);
-          newArr.push(this.state.options[rand]);
-          this.state.options.splice(rand, 1);
-        };
+
         this.setState({
-          options: newArr,
+          // options: newArr,
           score: 0
         });
       };
     };
+    let placeholder = this.newArray(this.state.options)
+    let newArr = [];
+    while (newArr.length < 12) {
+      let rand = Math.floor(Math.random() * placeholder.length);
+      newArr.push(placeholder[rand]);
+      placeholder.splice(rand, 1);
+    };
+    this.setState({ options: newArr });
+  };
+
+  newArray = arr => {
+    let result = [];
+    for (var i = 0; i < arr.length; i++) {
+      result.push(arr[i]);
+    };
+    return result;
   };
 
   addElements = () => {
