@@ -62,7 +62,7 @@ class App extends Component {
 
 
   click = id => {
-    let arr = this.state.idClicked;
+    let arr = this.newArray(this.state.idClicked);
     if (this.state.idClicked.length === 0) {
       let newScore = this.state.score + 1;
       arr.push(id.toString());
@@ -79,17 +79,25 @@ class App extends Component {
       };
       if (j === 0) {
         let newScore = this.state.score + 1;
-        arr.push(id.toString());
-        this.setState({
-          score: newScore,
-          idClicked: arr,
-        });
+        if (newScore === 12) {
+          this.setState({
+            score: 0,
+            idClicked: []
+          });
+          alert("You win!");
+        } else {
+          arr.push(id.toString());
+          this.setState({
+            score: newScore,
+            idClicked: arr,
+          });
+        };
       } else {
-
         this.setState({
-          // options: newArr,
-          score: 0
+          score: 0,
+          idClicked: []
         });
+        alert("You lost, please try again");
       };
     };
     let placeholder = this.newArray(this.state.options)
@@ -138,7 +146,7 @@ class App extends Component {
         </div>
       </div>
     );
-  }
+  };
 }
 
 export default App;
