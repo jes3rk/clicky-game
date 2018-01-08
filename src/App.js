@@ -5,6 +5,8 @@ import ImagePanel from "./components/Image";
 
 class App extends Component {
   state = {
+    idClicked: [],
+    score: 0,
     options: [
       {
         src: "http://media.guitarcenter.com/is/image/MMGS7/2017-Les-Paul-Standard-T-Electric-Guitar-Honey-Burst/J45014000002000-00-500x500.jpg/",
@@ -17,43 +19,97 @@ class App extends Component {
       {
         src: "https://www.dawsons.co.uk/media/catalog/product/cache/1/image/1200x/6b9ffbf72458f4fd2d3cb995d92e8889/y/a/yamaha_f310_acoustic_guitar_-_natural_-_main.jpg",
         alt: "yamaha f310"
+      },
+      {
+        src: "http://media.guitarcenter.com/is/image/MMGS7/LTD-Kirk-Hammett-Ouija-Limited-Edition-Electric-Guitar-Gloss-Natural/K36962000001000-00-500x500.jpg",
+        alt: "ouija guitar"
+      },
+      {
+        src: "https://cdn.shopify.com/s/files/1/0657/6821/products/1_248d476a-bac9-4e8b-ab41-448c5242fc82_x700.jpg?v=1489761307",
+        alt: "Les Paul smokey"
+      },
+      {
+        src: "https://www.artistguitars.com.au/assets/full/12683.jpg",
+        alt: "Strat"
+      },
+      {
+        src: "http://media.guitarcenter.com/is/image/MMGS7/Starter-Acoustic-Guitar-Blue-Burst/519266000030000-00-500x500.jpg",
+        alt: "Starter acoustic blue"
+      },
+      {
+        src: "http://media.guitarcenter.com/is/image/MMGS7/200-Series-Deluxe-224ce-K-Grand-Auditorium-Acoustic-Electric-Guitar-Shaded-Edge-Burst/J45043000001000-00-500x500.jpg",
+        alt: "K Grand Auditorium Acoustic Electric"
+      },
+      {
+        src: "https://www.jbhifi.com.au/FileLibrary/ProductResources/Images/203293-L-LO.jpg",
+        alt: "Epiphone SG"
+      },
+      {
+        src: "http://media.musiciansfriend.com/is/image/MMGS7/Les-Paul-Special-I-P90-Electric-Guitar-Worn-Black/H77433000001000-00-500x500.jpg",
+        alt: "Black Les Paul"
+      },
+      {
+        src: "http://media.musiciansfriend.com/is/image/MMGS7/ES-339-P90-PRO-Semi-Hollowbody-Electric-Guitar-Cherry/J07390000001000-00-500x500.jpg",
+        alt: "Epiphone Hollowbody"
+      },
+      {
+        src: "http://media.guitarcenter.com/is/image/MMGS7/Special-Edition-Deluxe-Ash-Telecaster-Maple-Fretboard-Butterscotch-Blonde/H72859000001001-00-500x500.jpg",
+        alt: "Fender Telecaster"
       }
-    ],
-    idClicked: [],
-    score: 0
+    ]
   };
+
+
 
   click = id => {
     let arr = this.state.idClicked;
     if (this.state.idClicked.length === 0) {
       let newScore = this.state.score + 1;
-      arr.push(id);
+      arr.push(id.toString());
       this.setState({
         score: newScore,
-        idClicked: arr
+        idClicked: arr,
       });
     } else {
       let j = 0;
-      console.log(id);
-      console.log(this.state.idClicked);
       for (var i = 0; i < this.state.idClicked.length; i++) {
-        if (this.state.idClicked[i] === id) {
+        if (this.state.idClicked[i] === id.toString()) {
           j++;
         };
-        if (i === this.state.idClicked.length - 1) {
-          if (j === 0) {
-            let newScore = this.state.score + 1;
-            arr.push(id);
-            this.setState({
-              score: newScore,
-              idClicked: arr
-            });
-          } else {
-            console.log("loss")
-          };
+      };
+      if (j === 0) {
+        let newScore = this.state.score + 1;
+        arr.push(id.toString());
+        this.setState({
+          score: newScore,
+          idClicked: arr,
+        });
+      } else {
+        let newArr = [];
+        while (newArr.length < 12) {
+          let rand = Math.floor(Math.random() * this.state.options.length);
+          newArr.push(this.state.options[rand]);
+          this.state.options.splice(rand, 1);
         };
+        this.setState({
+          options: newArr,
+          score: 0
+        });
       };
     };
+  };
+
+  addElements = () => {
+    return this.state.options.map((element, i) => (
+      <div className="col md3" key={i}>
+        <ImagePanel
+          src={element.src}
+          alt={element.alt}
+          id={i}
+          click={this.click}
+        />
+      </div>
+    ));
   };
 
   render() {
@@ -67,6 +123,7 @@ class App extends Component {
           </div>
         </div>
         <div className="row">
+          {this.addElements()}
         </div>
       </div>
     );
