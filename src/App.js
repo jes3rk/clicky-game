@@ -59,8 +59,6 @@ class App extends Component {
     ]
   };
 
-
-
   click = id => {
     let arr = this.newArray(this.state.idClicked);
     if (this.state.idClicked.length === 0) {
