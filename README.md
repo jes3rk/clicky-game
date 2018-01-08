@@ -20,4 +20,10 @@ All of the logic that runs this game is held in ```App```. ```App.state``` is th
 The ```click``` function is the crux of the app. It contains all the logic that runs the app and processes the current guess versus existing guesses and updates the state accordingly. The final element of the function generates a new array out of the options, randomizes those options, and updates the ```state.options``` to reflect the randomnesss. This is how the app randomizes the images after each user guess.
 
 #### newArray
-A helper function that seems solves an important issue. 
+A helper function that seems solves an important issue. React relies on the princple that ```state``` must be considered immutable with the exception of the ```.setState()``` method. Ordinary methods of manipulating arrays in JavaScript will often break this critical rule of React. Therefore, this simple function generates a bespoke new array based on any array passed to it and in doing so, preserves the important seperation between casual array manipulation and the ```.setState()``` method.
+
+#### addElements
+This is a simple function that maps the existing ```state.options``` array onto the ```<ImagePanel />``` component and passes the necessary properties or "props" to the component for rendering.
+
+### Image.js
+```Image.js``` is the component that generates the image tiles that the player interacts with. 
